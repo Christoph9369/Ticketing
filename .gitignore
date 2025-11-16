@@ -1,0 +1,22 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# Env
+.env
+.env.* 
+
+# Docker
+docker-compose.override.yml
+
+# Build
+dist/
+coverage/
+
+# Mac
+.DS_Store
