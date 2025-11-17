@@ -2,10 +2,9 @@
   "name": "auth",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts"
+    "start": "ts-node-dev --poll --respawn --transpile-only src/index.ts"
   },
   "keywords": [],
   "author": "",
