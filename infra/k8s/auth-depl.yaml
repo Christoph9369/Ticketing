@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: felix9/auth
+          image: ticketing/auth
 ---
 apiVersion: v1
 kind: Service
