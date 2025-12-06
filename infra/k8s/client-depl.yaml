@@ -1,35 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-deployment
+  name: client-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: client
   template:
     metadata:
       labels:
-        app: auth
+        app: client
     spec:
       containers:
-        - name: auth
-          image: felix9/auth
-          env:
-            - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+        - name: client
+          image: felix9/client
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: client-srv
 spec:
   type: ClusterIP
   selector:
-    app: auth
+    app: client
   ports:
     - protocol: TCP
       port: 3000

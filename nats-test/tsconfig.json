@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+
+    "strict": true,
+    "moduleResolution": "node",
+
+    "verbatimModuleSyntax": false,
+
+    "types": ["node"],
+
+    "isolatedModules": false,
+    "noUncheckedSideEffectImports": false
+  }
+}
