@@ -1,6 +1,6 @@
 {
   "name": "@cfticketing/common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "clean": "del-cli build/*",
-    "build": "npm run clean && tsc "
+    "build": "npm run clean && tsc ",
+    "pub":"git add . && git commit -m 'updates' && npm version patch && npm run build && npm publish "
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,4 @@
     "del-cli": "^7.0.0",
     "typescript": "^5.9.3"
   }
-
 }
