@@ -1,19 +1,16 @@
 {
   "compilerOptions": {
     "outDir": "./build",
+    "rootDir": "./src",
 
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2020",
+    "module": "CommonJS",
+    "target": "ES2019",
 
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true,
 
     "strict": true,
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
+    "esModuleInterop": true,
     "skipLibCheck": true
   }
 }
