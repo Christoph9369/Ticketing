@@ -6,16 +6,18 @@
   "scripts": {
     "publish": "ts-node-dev --notify false src/publisher.ts",
     "listen": "ts-node-dev --notify false src/listener.ts"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@types/node": "^24.10.1",
     "node-nats-streaming": "^0.3.2",
-    "ts-node-dev": "^2.0.0",
+    "ts-node-dev": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }

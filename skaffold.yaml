@@ -1,33 +1,77 @@
 apiVersion: skaffold/v2beta26
 kind: Config
+
+# ---------------------------
+# Build Configuration
+# ---------------------------
 build:
   local:
-    push: false
+    push: false # Do not push images to remote registry, use local Docker daemon
   artifacts:
+    # ---------------------------
+    # Auth service
+    # ---------------------------
     - image: felix9/auth
-      context: auth
+      context: auth # Context is auth folder, must contain package.json
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          # Sync TypeScript source files to container
+          - src: "src/**/*.ts"
+            dest: ./src
+          # Sync common package source
+          - src: "../common/src/**/*.ts"
+            dest: ./node_modules/@cfticketing/common/src
+
+    # ---------------------------
+    # Tickets service
+    # ---------------------------
+    - image: felix9/tickets
+      context: tickets # Context is tickets folder
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
-            dest: .
+            dest: ./src
+          - src: "../common/src/**/*.ts"
+            dest: ./node_modules/@cfticketing/common/src
+
+    # ---------------------------
+    # Client service
+    # ---------------------------
     - image: felix9/client
-      context: client
+      context: client # Context is client folder
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "**/*.js"
             dest: .
+
+# ---------------------------
+# Deployment Configuration
+# ---------------------------
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
+      - ./infra/k8s/* # All k8s manifests for deployment
+
+# ---------------------------
+# Port Forwarding
+# ---------------------------
 portForward:
   - resourceType: service
     resourceName: ingress-nginx-controller
     namespace: ingress-nginx
-    port: 80 # Forward HTTP
-    localPort: 8080 # Access via localhost:8080
+    port: 80 # Remote service port
+    localPort: 8080 # Local port to access service
 
+# ---------------------------
+# Notes / Tips
+# ---------------------------
+# 1. Each artifact context must contain a package.json for npm to work.
+# 2. Paths in Dockerfiles (COPY commands) are relative to the context.
+# 3. The sync section allows hot-reload: changes to .ts/.js files will be reflected inside the container.
+# 4. Make sure '../common' exists relative to auth/tickets contexts for building shared package.

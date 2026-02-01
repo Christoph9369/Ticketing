@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { validateRequest } from "../middlewares/validate-request";
-
-import { BadRequestError } from "../errors/bad-request-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
+import {
+  validateRequest,
+  BadRequestError,
+  DatabaseConnectionError,
+} from "@cfticketing/common";
 
 import { User } from "../models/user";
 import jwt from "jsonwebtoken"; // ✅ Correct import (NOT Jwt)
